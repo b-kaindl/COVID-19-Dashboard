@@ -1,1 +1,6 @@
+# Ignore venv
 .env/
+
+# no notebooks on GitHub
+*.ipynb
+.ipynb_checkpoints
