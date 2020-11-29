@@ -1,6 +1,8 @@
 # Ignore venv
-.env/
+cov_env/
 
-# no notebooks on GitHub
-*.ipynb
+# no notebookcheckpoints on GitHub
 .ipynb_checkpoints
+
+# for now - also don't track checkpoints for finding the learning rate
+*.ckpt
