@@ -6,3 +6,6 @@ cov_env/
 
 # for now - also don't track checkpoints for finding the learning rate
 *.ckpt
+
+# exclude lightning logs
+lightning_logs/
