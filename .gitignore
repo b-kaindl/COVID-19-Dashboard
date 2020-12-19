@@ -9,3 +9,9 @@ cov_env/
 
 # exclude lightning logs
 lightning_logs/
+
+# don't commit models
+*.pkl
+
+#ignore wandb logd
+wandb/
