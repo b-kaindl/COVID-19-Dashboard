@@ -1,3 +1,10 @@
+yaml
+data retrieval
+
+# 2021-01-23
+
+- Dependency management added
+
 # 2020-12-13
 
 - Applied feedback from `pytorch_forecasting` creator [Jan Beitner](https://github.com/jdb78) to fix bugs.

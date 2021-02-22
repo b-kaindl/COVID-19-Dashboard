@@ -6,6 +6,7 @@ cov_env/
 
 # exclude superfluous checkpoints
 capstone/
+optuna_test/
 
 # exclude lightning logs
 lightning_logs/
@@ -15,6 +16,9 @@ lightning_logs/
 
 #ignore wandb logd
 wandb/
+
+#ignore cleaned data
+cleaned
 
 # ignore caches
 .mypy_cache/

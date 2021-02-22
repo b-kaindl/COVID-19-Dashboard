@@ -8,6 +8,10 @@ The goal of this project is to summarize data retrieved from _Our World in Data_
 [To be filled out]
 
 ## Usage
+### Installing Dependencies
+Dependencies are defined in `requirements.txt` via flexible pinning (i.e. using `>=` rather than `==`). Running `update-deps.sh` updates therequirementsin`requirements.lock` as fixed pins on the latest version number using `pip`, unless the version number is already fixed in `requirements.txt`. Using `pip install -r requirements.lock` is thus preferred.
+
+
 [To be filled out]
 
 ## Author
