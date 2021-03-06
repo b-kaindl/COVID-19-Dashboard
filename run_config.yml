@@ -43,3 +43,15 @@ n_neighbors:
 weights:
   desc: Only used in value imputation
   value: "distance"
+targets:
+  desc: Varable(s) to be Predicted
+  value: "new_cases_smoothed"
+static_reals:
+  desc:
+  value: ['population','population_density','median_age','aged_65_older','aged_70_older',
+          'gdp_per_capita','cardiovasc_death_rate', 'diabetes_prevalence', 'handwashing_facilities',
+          'hospital_beds_per_thousand', 'life_expectancy', 'human_development_index', 'extreme_poverty', 'female_smokers','male_smokers']
+time_varying_known_reals:
+  desc: in reality unknown but could be used for conditional forecasts
+  value: ['time_idx','stringency_index', 'new_tests_smoothed','new_vaccinations_smoothed',
+          'new_deaths_smoothed']
