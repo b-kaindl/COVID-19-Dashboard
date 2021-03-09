@@ -1,4 +1,3 @@
-# TODO: split function into *testable* units
 import numpy as np
 import pandas as pd
 import requests

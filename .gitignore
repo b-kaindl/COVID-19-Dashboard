@@ -20,6 +20,8 @@ wandb/
 #ignore cleaned data
 cleaned
 
+
+
 # ignore caches
 .mypy_cache/
 .pytest_cache/
