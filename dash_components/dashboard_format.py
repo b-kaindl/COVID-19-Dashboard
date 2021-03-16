@@ -30,7 +30,7 @@ intro = html.Div(id="intro-root",
                     "."
                 ]
             ),
-        style={"marginBottom": "10px"}
+        style={"margin-bottom": "10px"}
         ),
     ]
 )
@@ -52,9 +52,9 @@ controls = html.Div(id="controls-root",
                                     multi=False,
                                     style={
                                     "width": "80%",
-                                    "marginLeft": "10px",
-                                    "marginRight": "10px",
-                                    "marginBottom": "10px"
+                                    "margin-left": "10px",
+                                    "margin-right": "10px",
+                                    "margin-bottom": "10px"
                                     }
                                 )
                             ]
@@ -62,7 +62,10 @@ controls = html.Div(id="controls-root",
                         dbc.Row(
                             children=[
                                 html.P("Latest Training Date: "),
-                                html.B(id='latest-training-date')
+                                dbc.Spinner(
+                                    html.B(id='latest-training-date'),
+                                    size= "sm"
+                                )
                             ]
                         )
                     ],
@@ -79,7 +82,8 @@ controls = html.Div(id="controls-root",
                                         current run_config.yml file.
                                     """
                                 )
-                            ]
+                            ],
+                            style={"margin-top": "1px"}
                         ),
                         dbc.Row(
                             dcc.Dropdown(id="model-dropdown",
@@ -88,9 +92,9 @@ controls = html.Div(id="controls-root",
                                 multi=False,
                                 style={
                                 "width": "80%",
-                                "marginLeft": "10px",
-                                "marginRight": "10px",
-                                "marginBottom": "10px"
+                                "margin-left": "10px",
+                                "margin-right": "10px",
+                                "margin-bottom": "10px"
                                 }
                             )
                         ),
@@ -108,16 +112,19 @@ plotting_controls = html.Div(id="plotting-control-root",
             children=[
                 dbc.Col(
                     children=[
-                        dcc.Dropdown(
-                        id="country-selector",
-                        placeholder="Choose a Country",
-                        multi=False,
-                        style={
-                            "MarginTop": "30px",
-                            "MarginBottom": "30px",
-                            "display": "block",
-                            "width": "80%"
-                            }
+                        dbc.Spinner(
+                            dcc.Dropdown(
+                            id="country-selector",
+                            placeholder="Choose a Country",
+                            multi=False,
+                            style={
+                                "MarginTop": "30px",
+                                "MarginBottom": "30px",
+                                "display": "block",
+                                "width": "80%"
+                                }
+                            ),
+                            spinner_style = {"margin-left": "5px"}
                         )
                     ],
                     style={"size": 1, "offset": 3}

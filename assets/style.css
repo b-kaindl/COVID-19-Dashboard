@@ -170,7 +170,7 @@ font-style : italic;
 color : #b29b35;
 }
 
-  /* INPUT ELEMENTS*/
+  /* Custom Elements*/
 
 .Select {
   color: #333;
@@ -189,4 +189,8 @@ color : #b29b35;
 
 .option {
   color: #333;
+}
+
+.row {
+  margin-top: 20px;
 }
