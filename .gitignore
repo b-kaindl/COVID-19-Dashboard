@@ -1,5 +1,6 @@
 # Ignore venv
 cov_env/
+.venv/
 
 # no notebookcheckpoints on GitHub
 .ipynb_checkpoints
@@ -14,8 +15,9 @@ lightning_logs/
 # don't commit models
 *.pkl
 
-#ignore wandb logd
+#ignore wandb logs and locally stored artifacts
 wandb/
+artifacts/
 
 #ignore cleaned data
 cleaned
