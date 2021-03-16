@@ -13,7 +13,7 @@ def main() -> None:
 
     try:
 
-        app.run_server(debug=True)
+        app.run_server(debug=False)
 
     finally:
         # clear application cache on exit

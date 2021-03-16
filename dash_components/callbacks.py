@@ -17,6 +17,7 @@ from wandb.sdk.wandb_config import Config
 
 from app import app, cache
 from utils.asset_loader import data_loader, model_loader
+from utils.plotting import plot_country_prediction
 
 from typing import Union, Any, List
 
@@ -31,20 +32,9 @@ def assign_callbacks(app: dash.Dash) -> None:
     # IDEA: add entry for model name in yml to make sure models can only bbe used with the
     # right config file
     CONF: str = "run_config.yml"
+    run = wandb.init(mode="disabled", config=CONF)
+    config: Config = run.config
 
-    # initialize offline WANDB run to get model parameters and store resulting
-    # run in cache
-    # @cache.cached(timeout=600, key_prefix="config")
-    # def run_config() -> Config:
-    #     """
-    #     Initialize WANDB run without logging to get model parameters and
-    #     store resulting run in cache
-    #     """
-    #     run = wandb.init(mode="disabled", config=CONF)
-    #     config: Config = run.config
-    #     return config
-    #
-    # config = run_config()
 
     # load most recent data into cache to be used across callbacks
     # see https://dash.plotly.com/sharing-data-between-callbacks
@@ -59,11 +49,8 @@ def assign_callbacks(app: dash.Dash) -> None:
         # load data from URL
         data = data_loader.load_asset_from_url(URL)
 
-        run = wandb.init(mode="disabled", config=CONF)
-        config: Config = run.config
 
-
-        # get observations with insufficient data points and region aggregates
+        # get observations with insufficient data points
 
         indices_to_drop = data.groupby("location").agg("size").loc[
            (data.groupby("location").agg("size") <
@@ -157,11 +144,12 @@ def assign_callbacks(app: dash.Dash) -> None:
 
         return [new_prediction_data, pred_ts]
 
-    new_prediction_data, pred_ts = prediction_timeseries()
+    # new_prediction_data, pred_ts = prediction_timeseries()
 
     @app.callback(
         Output("latest-training-date","children"),
-        Input("training-data-dropdown", "value")
+        Input("training-data-dropdown", "value"),
+        prevent_initial_call=True
     )
     def update_latest_training_date(path):
         """
@@ -175,6 +163,7 @@ def assign_callbacks(app: dash.Dash) -> None:
     @app.callback(
         Output("country-selector", "options"),
         Input("latest-training-date","children"),
+        prevent_initial_call=True
     )
     def update_country_selection(date):
         """
@@ -183,8 +172,9 @@ def assign_callbacks(app: dash.Dash) -> None:
         we prepare the data, but we need an input to trigger population of the index
         """
         if date:
-            # get full prediction data (as df) and config
+            # get full prediction data (as df)
             pred_df, pred_ts = prediction_timeseries()
+
             # mapping of ISO3 names to country names
             iso_name_df = pd.read_csv("iso3.csv")
             iso_name_dict = dict(zip(iso_name_df.ISO3, iso_name_df.name))
@@ -210,3 +200,59 @@ def assign_callbacks(app: dash.Dash) -> None:
             return options
         else:
             return None
+
+    @app.callback(
+        Output("plotting-area", "children"),
+        Input("country-selector", "value"),
+        State("model-dropdown", "value"),
+        State("latest-training-date","children"),
+        prevent_initial_call=True
+    )
+    def plot_prediction(country_index, model_path, train_end):
+        """
+        Callback to load model and load prediction for country
+        """
+
+        # load specified model
+        model = model_loader.load_asset(model_path)
+
+        # get full prediction data (as df)
+        pred_df, pred_ts = prediction_timeseries()
+
+        day_zero = pred_df.date.max()
+
+        # mapping of ISO3 names to country names
+        iso_name_df = pd.read_csv("iso3.csv")
+        iso_name_dict = dict(zip(iso_name_df.ISO3, iso_name_df.name))
+
+        # build new index to map index -> iso
+        new_index = dict(
+            tuple(
+                zip(
+                   range(0,pred_df.location.nunique()),
+                   pred_df.location.unique()
+               )
+            )
+        )
+
+
+        # get country name for plot title --> take care of OWID aggregates
+        country_name = (
+            new_index[country_index]
+            if new_index[country_index].startswith("OWID") else
+            iso_name_dict[new_index[country_index]]
+        )
+
+        # make predictions on TimeSeries object
+        predictions, new_x = model.predict(pred_ts, mode="raw", return_x=True)
+
+        # prepare data needed for plot
+        figure = plot_country_prediction(model, predictions, new_x, country_index, country_name,
+                                    day_zero, train_end)
+
+        return dcc.Graph(
+            figure=figure,
+            )
+
+    # end wandb run
+    run.finish()
