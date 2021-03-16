@@ -1,0 +1,196 @@
+html, body {
+margin : 0;
+padding : 0;
+}
+body {
+color : #fff;
+background : #484452;
+/* width : 100%; */
+font : 100% "lucida sans", "Trebuchet MS", Arial, Helvetica, Tahoma, sans-serif;
+}
+			/*WRAP*/
+/*#container {
+width : 80%;
+margin : 0 auto;
+line-height: 2em;
+background : #F8F2DA url(images/bg1.jpg);
+color : #333;
+}*/
+			/*TOP BANNER*/
+#top {
+padding : 0.5em;
+height: 100px;
+background : #C7AFBD url(images/top.jpg);
+color : #484452;
+}
+#top h1 {
+padding : 0;
+margin : 10px 0 0 10px;
+font-size : 170%;
+letter-spacing: 5px;
+}
+			/*LEFT SIDEBAR*/
+#leftnav {
+float : left;
+width : 160px;
+margin : 0;
+padding : 1em;
+}
+#leftnav p {
+margin : 0 0 1em 0;
+}
+			/*MAIN CONTENT*/
+#content {
+margin-left : 200px;
+border-left : 1px solid #A662AA;
+padding : 1em 3em 0 3em;
+}
+			/*FOOTER*/
+#footer {
+clear : both;
+margin : 0;
+padding : .5em 0 1em 0;
+font-size : 0.9em;
+border-bottom : 0px solid #808080;
+border-top :1px solid #808080;
+color : #fafafa;
+background : #5E516F;
+}
+#footer a {
+background: inherit;
+color: #C7AFBD;
+}
+#footer a:hover {
+background: inherit;
+color: #333;
+}
+#footer img {
+float : right;
+}
+/* seen by IE5mac only, by Philippe Wittenbergh www.l-c-n.com */
+*>html #footer img {
+        margin : 0;
+}
+/* end */
+#footer p {
+padding-left :10px;
+}
+		/* TOP NAVIGATION  */
+#navcontainer ul {
+text-align: center;
+padding-bottom: 10px;
+padding-top: 10px;
+padding-left: 0;
+margin-top: 0;
+/* cancels gap caused by top padding in Opera 7.54 */
+margin-left: 0;
+background: #5E516F;
+color: #fff;
+width: 100%;
+font-family: Helvetica, Arial, sans-serif;
+line-height: 18px;
+/* fixes Firefox 0.9.3 */
+}
+#navcontainer ul li {
+display: inline;
+padding-left: 0;
+padding-right: 0;
+padding-bottom: 10px;
+/* matches link padding except for left and right */
+padding-top: 10px;
+}
+#navcontainer ul li a {
+padding-left: 10px;
+padding-right: 10px;
+padding-bottom: 10px;
+padding-top: 10px;
+color: #fff;
+text-decoration: none;
+border-right: 1px solid #fff;
+}
+#navcontainer ul li a:hover {
+background: #C7AFBD;
+color: #333;
+}
+#navcontainer #active {
+border-left: 1px solid #fff;
+}
+		/* SEARCH BOX */
+form { float: right;
+margin-bottom: 20px;
+}
+input.search {
+	width: 100px;
+	border: none;
+	background: url(images/input.gif);
+	padding: 4px;
+}
+input.login {
+	width: 75px;
+	border: none;
+	background: url(images/logininput.gif);
+	padding: 4px;
+}
+		/* LINKS */
+a:link, a:visited {
+color : #360539;
+background : transparent;
+text-decoration : none;
+}
+a:hover {
+color : #484452;
+text-decoration : none;
+}
+a:active {
+color : #484500;
+text-decoration : none;
+}
+img {
+border : none;
+}
+		/*CLASS */
+.quote {
+border-top : 1px solid #A662AA;
+padding : 10px;
+color: #A662AA;
+}
+.imgleft {
+float: left;
+}
+		/* TYPOGRAPHY */
+h2 {
+margin : 0 0 .5em 0;
+font-size : 130%;
+color : #5E516F;
+background : transparent;
+}
+blockquote {
+font-weight : bold;
+font-style : italic;
+color : #b29b35;
+}
+
+  /* Custom Elements*/
+
+.Select {
+  color: #333;
+}
+.Select-control {
+  color: #333;
+}
+
+.Select-placeholder{
+  color: #333;
+}
+
+.Select-input {
+  color: #333;
+}
+
+.option {
+  color: #333;
+}
+
+.row {
+  margin-top: 20px;
+}

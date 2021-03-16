@@ -1,11 +1,30 @@
 # Ignore venv
 cov_env/
+.venv/
 
 # no notebookcheckpoints on GitHub
 .ipynb_checkpoints
 
-# for now - also don't track checkpoints for finding the learning rate
-*.ckpt
+# exclude superfluous checkpoints
+capstone/
+optuna_test/
 
 # exclude lightning logs
 lightning_logs/
+
+# don't commit models
+*.pkl
+
+#ignore wandb logs and locally stored artifacts
+wandb/
+artifacts/
+
+#ignore cleaned data
+cleaned
+
+
+
+# ignore caches
+.mypy_cache/
+.pytest_cache/
+__pycache__/
