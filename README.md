@@ -1,12 +1,23 @@
-# COVID-19 Dashboard
+# Predictive COVID-19 Dashboard
 
 ## About This Project
 **DISCLAIMER**: This project is part of Udacity's Data Scientist Nanodegree. The model shipped with this version of the project is to be understood as a proof of concept or, at most, a starting point for further model improvements. Please refer to official information and guidance provided by your local authorities concerning the COVID-19 pandemic rather than trusting some stranger on the internet and their private coding project.
 
-
+### Objective
 The goal of this project is to train a Temporal Fusion Transformer (TFT) Model on data retrieved from [_Our World in Data_](https://github.com/owid/covid-19-data/tree/master/public/data) and to provide an interface to access predictions made by TFTs via `dash`
 
-### File Structure
+### Results and Outcome
+The outcome of this model is a fully trained TFT Model trained on the aforementioned dataset containing observations up until 2021/02/19.
+
+For model selection we used the mean absolute error (MAE) of the predictions, as it is an error measure that is easy to interpret and take into account when evaluating predictions by the model. With an MAE of 425.66 the trained model `smooth_jazz_5` beats the forward-filling baseline model provided by `pytorch-forecasting` (667.71).
+
+For fitting, we use quantile loss to take into account the probabilistic nature of TFT predictions. At the epoch with the best outcome the validation quantile loss was at 149.71.
+
+Although the model still shows room for improvement, practitioners should be easily able to adapt, reconfigure and re-train the model for further improvements.
+
+The main finding of this project is the straight-forward setup that can be used to tackle complex time-series prediction problems to yield promising results and a readily interpretable output to draw some conclusions beyond prediction.
+
+## Project Structure
 - Submission.ipynb : Submission notebook for project submission to Udacity. Outlines the training process and provides a discussion of the data used in training
 - dash_components/ : Contains the source files defining the application's layout and callback functionality
 - models/ : Contains the model checkpoint files to be loaded at application startup
@@ -40,6 +51,19 @@ If you want to install the most recently locked version for each package, run:
 ```
 pip install -r requirements.lock
 ```
+
+#### Main Dependencies
+The following list outlines the main dependencies needed to run the Notebook and the Dash application. For a complete list including second-level dependencies (i.e. dependencies of dependencies), refer to the `requirements.lock` file.
+
+- `dash>=1.19.0`: used for web application interface
+- `matplotlib>=3.3.4`: used for plots in Submission.ipynb
+- `numpy>=1.18.5`: used for data manipulation
+- `pandas>=1.2.3`: used for data manipluation
+- `plotly>=4.14.3`: used for custom plot in Dash application
+- `pytorch-forecasting>=0.8.3`: used for model training and predictions
+- `pytorch-lightning=>1.2.2`: used for logging and callbacks by `pytorch-forecasting`
+- `wandb>=0.10.21`: used for model configuration and (optionally) for experiment tracking
+
 
 ## Usage
 ### Preparing Model and Data for Usage
